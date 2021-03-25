@@ -18,6 +18,21 @@ namespace OdeToFood.Data.Services
                 new Restaurant {Id = 3, Name = "Mango Groove", Cuisine = CuisineType.Italaian}
             };
         }
+        public void Add(Restaurant restaurant)
+        {
+            restaurants.Add(restaurant);
+            restaurant.Id = restaurants.Max(r => r.Id) + 1;
+        }
+
+        public void Update(Restaurant restaurant)
+        {
+            var existing = Get(restaurant.Id);
+            if (existing != null)
+            {
+                existing.Name = restaurant.Name;
+                existing.Cuisine = restaurant.Cuisine;
+            }
+        }
 
         public Restaurant Get(int id)
         {
